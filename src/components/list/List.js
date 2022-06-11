@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import { DataGrid } from '@mui/x-data-grid';
-import { showPosts } from '../../slices';
+import { fetchPosts } from '../../slices';
 
 const columns = [
 	{ field:  'title', headerName: 'Post title', width: 1000 },
@@ -27,7 +27,7 @@ const List = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(showPosts());
+		dispatch(fetchPosts());
 	}, [dispatch]);
 
 	console.log('POSTS ===> ', posts);
