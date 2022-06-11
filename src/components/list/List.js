@@ -1,7 +1,8 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import { DataGrid } from '@mui/x-data-grid';
-// import Post from '../post/Post';
+import { showPosts } from '../../slices';
 
 const columns = [
 	{ field:  'title', headerName: 'Post title', width: 1000 },
@@ -22,6 +23,15 @@ const rows = [
 ];
 
 const List = () => {
+	const posts = useSelector(state => state.posts);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(showPosts());
+	}, [dispatch]);
+
+	console.log('POSTS ===> ', posts);
+
 	return (
 			<Grid item xs={8}>
 				<DataGrid

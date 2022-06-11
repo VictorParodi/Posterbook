@@ -5,9 +5,15 @@ import './app.css';
 
 const App = () => {
 	return(
-		<Grid container justifyContent="center">
-			<List />
-		</Grid>
+		<>
+			<Grid container justifyContent="center">
+				<Grid item xs={8}>
+					<h1>Posterbook</h1>
+				</Grid>
+
+				<List />
+			</Grid>
+		</>
 	);
 }
 
