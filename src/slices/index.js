@@ -1,20 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import jsonplaceholder from './../apis/jsonplaceholder';
+import { getData } from "../helpers/getData";
 
-const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-	const response = await jsonplaceholder.get('/posts');
-	const { data } = await response;
-	return data;
-});
+const fetchPosts = createAsyncThunk('posts/fetchPosts', () => getData('posts'));
 
 const postsSlice = createSlice({
 	name: 'posts',
 	initialState: [],
-	reducers: {
-		showPosts(initialState) {
-			return [...initialState, {id:'qwerty', title: 'New post', body: 'Body for the newest post item'}]
-		}
-	},
 	extraReducers: (builder) => {
 		builder
 		.addCase(fetchPosts.pending, (state, action) => {
