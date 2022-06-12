@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Grid from '@mui/material/Grid';
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -53,26 +52,20 @@ const List = () => {
 		}
 	];
 
-	const rows = posts.map(postItem => {
-		return {...postItem, actions: 'X'};
-	});
-
-	console.log('POSTS ===> ', rows);
+	const rows = posts.map(postItem => postItem);
 
 	return (
-			<Grid item xs={8}>
-				<DataGrid
-					rows={rows}
-					columns={columns}
-					pageSize={10}
-					rowsPerPageOptions={[10]}
-					checkboxSelection={false}
-					autoHeight
-					hideFooterSelectedRowCount={true}
-					disableColumnFilter={true}
-					disableColumnMenu={true}
-				/>
-			</Grid>
+		<DataGrid
+			rows={rows}
+			columns={columns}
+			pageSize={10}
+			rowsPerPageOptions={[10]}
+			checkboxSelection={false}
+			autoHeight
+			hideFooterSelectedRowCount={true}
+			disableColumnFilter={true}
+			disableColumnMenu={true}
+		/>
 	);
 }
 

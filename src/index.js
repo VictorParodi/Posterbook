@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { postsReducer } from './slices';
-import App from './components/app/App';
+import App from './app/App';
 
 const store = configureStore({
 	reducer: {
