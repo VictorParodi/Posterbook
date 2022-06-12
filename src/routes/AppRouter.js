@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { appRoutes } from './routes';
+import Navbar from '../ui/navbar/Navbar';
 
 const AppRouter = () => {
 	const renderRoutes = appRoutes.map(({name, path, element}) => {
@@ -9,6 +10,7 @@ const AppRouter = () => {
 
 	return (
 		<BrowserRouter>
+			<Navbar />
 			<Routes>
 				{ renderRoutes }
 			</Routes>
