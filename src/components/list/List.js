@@ -12,7 +12,7 @@ import { useFetch } from '../../hooks/useFetch';
 import { getColumns, getRows } from '../../helpers/configTable';
 
 const List = () => {
-	const { posts, setPosts } = useContext(PostsContext);
+	const { posts, setPosts } = useContext(PostsContext)
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 	const newPosts = useFetch('/posts');
