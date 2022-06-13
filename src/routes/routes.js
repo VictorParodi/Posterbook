@@ -12,7 +12,7 @@ const appRoutes = [
 	},
 	{
 		name: 'post',
-		path: '/post/:id',
+		path: '/posts/:id',
 		element: <PostScreen />
 	},
 	{
