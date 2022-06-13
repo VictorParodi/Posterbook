@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect, useContext} from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,18 +7,19 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 
-import { fetchPosts } from '../../slices';
+import { PostsContext } from '../../context/PostsContext';
+import { useFetch } from '../../hooks/useFetch';
 import { getColumns, getRows } from '../../helpers/configTable';
 
 const List = () => {
+	const { posts, setPosts } = useContext(PostsContext)
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
-	const posts = useSelector(state => state.posts);
-	const dispatch = useDispatch();
+	const newPosts = useFetch('/posts');
 
 	useEffect(() => {
-		dispatch(fetchPosts());
-	}, [dispatch]);
+		setPosts(newPosts);
+	}, [newPosts, setPosts]);
 
 	const handlePageChange = (event, newPage) => setPage(newPage);
 
