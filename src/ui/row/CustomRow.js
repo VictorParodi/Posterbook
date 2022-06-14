@@ -8,6 +8,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
+import Snackbar from '@mui/material/Snackbar';
+import Button from '@mui/material/Button';
 import { red } from '@mui/material/colors';
 import { PostsContext } from '../../context/PostsContext';
 import { deleteData } from '../../helpers/deleteData';
@@ -26,6 +28,7 @@ const style = {
 };
 
 const CustomRow = ({row}) => {
+	const [notificationState, setNotificationState] = useState(false);
 	const [inputTitle, setInputTitle] = useState(row.title)
 	const [open, setOpen] = useState(false);
 	const { posts, setPosts } = useContext(PostsContext);
@@ -35,10 +38,13 @@ const CustomRow = ({row}) => {
 		navigate(`/posts/${row.id}`);
 	}
 
-	const handleDelete = () => {
+	const handleDelete = (event) => {
 		deleteData(`/posts/${row.id}`);
 		const newPosts = posts.filter(post => post.id !== row.id);
-		setPosts(newPosts);
+		setNotificationState(true);
+		setTimeout(() => {
+			setPosts(newPosts);
+		}, 400);
 	}
 
 	const handleOpen = (event) => {
@@ -66,7 +72,13 @@ const CustomRow = ({row}) => {
 		updateData(newPost, `/posts/${row.id}`);
 		setPosts(updatedPosts);
 		handleClose();
+		setNotificationState(true);
 	}
+
+	const handleCloseNotification = (event, reason) => {
+		if (reason === 'clickaway') {return;}
+		setNotificationState(false);
+	};
 
 	const styles = {
 		icons: { cursor: 'pointer' }
@@ -106,6 +118,13 @@ const CustomRow = ({row}) => {
 				</TableCell>
 			</TableRow>
 
+			<Snackbar
+				open={notificationState}
+				autoHideDuration={1000}
+				onClose={handleCloseNotification}
+				message="Action completed"
+			/>
+
 			<Modal
 					open={open}
 					onClose={handleClose}
@@ -127,8 +146,8 @@ const CustomRow = ({row}) => {
 							variant="outlined"
 							onChange={ handleInputChange}
 						/>
-						{/* <TextField id="filled-basic" label="Body" variant="outlined" /> */}
-						{/* <TextField id="standard-basic" label="Standard" variant="standard" /> */}
+
+						<Button onClick={handleSubmit}>Send</Button>
 					</Box>
 				</Box>
 			</Modal>
